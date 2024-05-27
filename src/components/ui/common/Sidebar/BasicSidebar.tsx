@@ -20,18 +20,14 @@ import "@coreui/coreui/dist/css/coreui.min.css";
 import SucursalService from "../../../../services/SucursalService";
 import ISucursal from "../../../../types/ISucursal";
 import "../../../../Styles/Variables.css";
-import styles from "./BasicSidebar.module.css";
-import { colors } from "@mui/material";
-import EmpresaService from "../../../../services/EmpresaService";
 
 const BasicSidebar: React.FC = () => {
   const { sucursalId } = useParams<{ sucursalId: string }>();
   const [sucursalNombre, setSucursalNombre] = useState<string>("");
   const [empresaNombre, setEmpresaNombre] = useState<string>("");
   const url = import.meta.env.VITE_API_URL;
-  const empresaService = new EmpresaService();
+
   const sucursalService = new SucursalService();
-  const [, setEmpresaSucursales] = useState<ISucursal[]>();
 
   useEffect(() => {
     const fetchSucursalYEmpresaNombre = async () => {
@@ -60,18 +56,6 @@ const BasicSidebar: React.FC = () => {
 
   console.log(sucursalNombre);
 
-  const fetchSucursalesForEmpresa = async (empresaId: number) => {
-    try {
-      const empresa = await empresaService.get(
-        url + `/empresa/sucursales`,
-        empresaId
-      );
-      setEmpresaSucursales(empresa.sucursales);
-    } catch (error) {
-      console.error("Error al obtener las sucursales:", error);
-      return [];
-    }
-  };
   return (
     <div>
       <CSidebar
