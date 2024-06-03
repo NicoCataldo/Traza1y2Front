@@ -25,8 +25,10 @@ import IImagen from "../../../types/IImagen";
 import ISucursal from "../../../types/ISucursal";
 import "../../../Styles/Variables.css";
 import Styles from "../Empresa/EmpresasComponent.module.css";
+import { useNavigate } from "react-router-dom";
 
 const EmpresaComponent: React.FC = () => {
+  const navigate = useNavigate();
   const url = import.meta.env.VITE_API_URL;
   const dispatch = useAppDispatch();
   const empresaService = new EmpresaService();
@@ -172,7 +174,7 @@ const EmpresaComponent: React.FC = () => {
                     startIcon={<Visibility />}
                     onClick={() => {
                       fetchSucursalesForEmpresa(empresa.id);
-                      window.location.href = `/empresa/${empresa.id}`;
+                      navigate(`/empresa/${empresa.id}`);
                     }}
                     sx={{
                       color: "#ffffff",
